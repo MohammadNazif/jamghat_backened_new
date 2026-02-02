@@ -212,33 +212,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/InternshipResponseDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/InternshipResponseDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/InternshipResponseDto"
-                  }
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -278,6 +252,10 @@
                     "type": "string",
                     "format": "binary"
                   },
+                  "totalCount": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
                   "Image": {
                     "type": "string"
                   }
@@ -303,6 +281,9 @@
                   "style": "form"
                 },
                 "ImageFile": {
+                  "style": "form"
+                },
+                "totalCount": {
                   "style": "form"
                 },
                 "Image": {
@@ -477,66 +458,10 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "InternshipResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
+          },
+          "totalCount": {
             "type": "integer",
             "format": "int32"
-          },
-          "fullName": {
-            "type": "string",
-            "nullable": true
-          },
-          "age": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "class": {
-            "type": "string",
-            "nullable": true
-          },
-          "applyingAs": {
-            "type": "string",
-            "nullable": true
-          },
-          "startDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "daysPerWeek": {
-            "type": "string",
-            "nullable": true
-          },
-          "interestIn": {
-            "type": "string",
-            "nullable": true
-          },
-          "otherInterest": {
-            "type": "string",
-            "nullable": true
-          },
-          "pastExperience": {
-            "type": "string",
-            "nullable": true
-          },
-          "policeDeclaration": {
-            "type": "boolean"
-          },
-          "certificateRequired": {
-            "type": "boolean"
-          },
-          "letterFilePath": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false

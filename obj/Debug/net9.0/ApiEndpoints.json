@@ -100,23 +100,13 @@
   },
   {
     "ContainingType": "Jamghat.Controllers.AdminApiController",
-    "Method": "GetAll",
+    "Method": "GetAllInternships",
     "RelativePath": "api/AdminApi/getintershipData",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[Jamghat.Models.Admin.AdminModel\u002BInternshipResponseDto, jamghat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Jamghat.Controllers.AdminApiController",
@@ -146,7 +136,7 @@
   },
   {
     "ContainingType": "Jamghat.Controllers.AdminApiController",
-    "Method": "Login",
+    "Method": "InsertContactForm",
     "RelativePath": "api/AdminApi/InserContactForm",
     "HttpMethod": "POST",
     "IsController": true,
@@ -232,6 +222,11 @@
       {
         "Name": "ImageFile",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "totalCount",
+        "Type": "System.Int32",
         "IsRequired": false
       },
       {

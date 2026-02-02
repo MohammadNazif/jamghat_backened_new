@@ -1,6 +1,6 @@
-﻿using Jamghat.Models.Admin;
+﻿using jamghat.Models.ResponseFormat;
+using Jamghat.Models.Admin;
 using Jamghat.Models.Auth;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static Jamghat.Models.Admin.AdminModel;
@@ -9,190 +9,165 @@ namespace Jamghat.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
-    public class AdminApiController : ControllerBase
+    public class AdminApiController : GenericApiController
     {
         private readonly IAdminService _adminService;
         private readonly IWebHostEnvironment _env;
+
         public AdminApiController(IAdminService adminService, IWebHostEnvironment env)
         {
             _adminService = adminService;
             _env = env;
         }
 
+        // ---------------- CONTACT FORM ----------------
         [HttpPost("InserContactForm")]
-        public IActionResult Login([FromBody] ContactForm contactForm)
+        public async Task<IActionResult> InsertContactForm([FromBody] ContactForm contactForm)
         {
             if (contactForm == null)
-                return BadRequest(new { message = "InValid Request" });
+                return Fail("Invalid request");
 
-            var result = _adminService.AddContactFormAsync(contactForm);
-
-            return Ok();
+            return await RespondAsync(async () =>
+            {
+                await _adminService.AddContactFormAsync(contactForm);
+                return true;
+            }, "Contact form submitted successfully");
         }
 
-        [Authorize(Roles ="Admin")]
         [HttpGet("contactforms")]
         public async Task<IActionResult> GetAllContactForms()
         {
-            var list = await _adminService.GetAllContactFormsAsync();
-            return Ok(list);
+            return await RespondAsync(
+                () => _adminService.GetAllContactFormsAsync(),
+                "Contact forms fetched successfully");
         }
 
-        [Authorize(Roles = "Admin")]
+        // ---------------- PDF ----------------
         [HttpPost("insertpdf")]
         public async Task<IActionResult> InsertPdf(IFormFile file, [FromForm] string filename)
         {
             if (file == null || file.Length == 0)
-                return BadRequest("File is required");
+                return Fail("File is required");
 
             if (Path.GetExtension(file.FileName).ToLower() != ".pdf")
-                return BadRequest("Only PDF files allowed");
+                return Fail("Only PDF files allowed");
 
-            // Physical folder (for saving)
-            var folderPath = Path.Combine(_env.ContentRootPath, "Uploads", "pdfs");
-
-            if (!Directory.Exists(folderPath))
+            return await RespondAsync(async () =>
+            {
+                var folderPath = Path.Combine(_env.ContentRootPath, "Uploads", "pdfs");
                 Directory.CreateDirectory(folderPath);
 
-            // Save file physically
-            var physicalPath = Path.Combine(folderPath, file.FileName);
-            using (var stream = new FileStream(physicalPath, FileMode.Create))
-            {
+                var physicalPath = Path.Combine(folderPath, file.FileName);
+                await using var stream = new FileStream(physicalPath, FileMode.Create);
                 await file.CopyToAsync(stream);
-            }
 
-            // ✅ Store RELATIVE path in DB
-            var dbPath = Path.Combine("Uploads/pdfs", file.FileName)
-                             .Replace("\\", "/");
+                var dbPath = Path.Combine("Uploads/pdfs", file.FileName)
+                    .Replace("\\", "/");
 
-            await _adminService.InsertPdfAsync(filename, dbPath);
+                await _adminService.InsertPdfAsync(filename, dbPath);
 
-            return Ok(new
-            {
-                message = "PDF uploaded successfully",
-                pathStoredInDb = dbPath
-            });
+                return new { PathStoredInDb = dbPath };
+            }, "PDF uploaded successfully");
         }
 
-
-        // GET PDFs
         [HttpGet("getpdf")]
         public async Task<IActionResult> GetPdfs()
         {
-            var data = await _adminService.GetAllActivePdfsAsync();
-            return Ok(data);
+            return await RespondAsync(
+                () => _adminService.GetAllActivePdfsAsync(),
+                "PDFs fetched successfully");
         }
 
+        // ---------------- INTERNSHIP ----------------
         [HttpPost("apply")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> ApplyInternship([FromForm] InternshipRequestDto request)
         {
             if (request.CertificateFile == null || request.CertificateFile.Length == 0)
-                return BadRequest("Certificate file is required");
+                return Fail("Certificate file is required");
 
             var allowedExtensions = new[] { ".pdf", ".jpg", ".jpeg", ".png" };
             var extension = Path.GetExtension(request.CertificateFile.FileName).ToLower();
 
             if (!allowedExtensions.Contains(extension))
-                return BadRequest("Only PDF, JPG, JPEG, PNG files are allowed for certificate");
+                return Fail("Only PDF, JPG, JPEG, PNG files are allowed");
 
-            // Folder for saving certificate
-            string folderPath = Path.Combine(_env.ContentRootPath, "Uploads", "certificates");
-            if (!Directory.Exists(folderPath))
+            return await RespondAsync(async () =>
+            {
+                var folderPath = Path.Combine(_env.ContentRootPath, "Uploads", "certificates");
                 Directory.CreateDirectory(folderPath);
 
-            // Generate unique file name to avoid collisions
-            string uniqueFileName = $"{Guid.NewGuid()}{extension}";
-            string physicalPath = Path.Combine(folderPath, uniqueFileName);
+                var uniqueFileName = $"{Guid.NewGuid()}{extension}";
+                var physicalPath = Path.Combine(folderPath, uniqueFileName);
 
-            // Save the file
-            using (var stream = new FileStream(physicalPath, FileMode.Create))
-            {
+                await using var stream = new FileStream(physicalPath, FileMode.Create);
                 await request.CertificateFile.CopyToAsync(stream);
-            }
 
-            // Relative path to store in DB
-            string dbPath = Path.Combine("Uploads/certificates", uniqueFileName)
-                                .Replace("\\", "/");
+                var dbPath = Path.Combine("Uploads/certificates", uniqueFileName)
+                    .Replace("\\", "/");
 
-            // Call service to insert the form data along with certificate path
-            bool success = await _adminService.InsertInternshipAsync(request, dbPath);
+                await _adminService.InsertInternshipAsync(request, dbPath);
 
-            if (success)
-                return Ok(new { message = "Internship application submitted successfully", certificatePath = dbPath });
-
-            return StatusCode(500, "Error submitting internship application");
+                return new { CertificatePath = dbPath };
+            }, "Internship application submitted successfully");
         }
-        [Authorize(Roles = "Admin")]
+
         [HttpGet("getintershipData")]
-        public async Task<ActionResult<List<InternshipResponseDto>>> GetAll()
+        public async Task<IActionResult> GetAllInternships()
         {
-            var internships = await _adminService.GetInternshipsAsync();
-            if (internships == null || internships.Count == 0)
-                return NotFound("No internship applications found.");
-
-            return Ok(internships);
+            return await RespondAsync(
+                () => _adminService.GetInternshipsAsync(),
+                "Internship applications fetched successfully");
         }
 
-        [Authorize(Roles = "Admin")]
+        // ---------------- MEDIA CENTRE ----------------
         [HttpPost("mediaCentreInsert")]
-        public async Task<IActionResult> InsertMediaCentre([FromForm] ItemDto item)
+        public IActionResult InsertMediaCentre([FromForm] ItemDto item)
         {
             if (item.ImageFile == null || item.ImageFile.Length == 0)
-                return BadRequest("Image is required");
+                return Fail("Image is required");
 
-            string folderPath = Path.Combine(_env.ContentRootPath, "Uploads", "media");
+            var folderPath = Path.Combine(_env.ContentRootPath, "Uploads", "media");
             Directory.CreateDirectory(folderPath);
 
-            string extension = Path.GetExtension(item.ImageFile.FileName);
-            string fileName = $"{Guid.NewGuid()}{extension}";
-            string physicalPath = Path.Combine(folderPath, fileName);
+            var extension = Path.GetExtension(item.ImageFile.FileName);
+            var fileName = $"{Guid.NewGuid()}{extension}";
+            var physicalPath = Path.Combine(folderPath, fileName);
 
-            using (var stream = new FileStream(physicalPath, FileMode.Create))
-            {
-                await item.ImageFile.CopyToAsync(stream);
-            }
+            using var stream = new FileStream(physicalPath, FileMode.Create);
+            item.ImageFile.CopyTo(stream);
 
-            string dbPath = $"/Uploads/media/{fileName}";
+            var dbPath = $"/Uploads/media/{fileName}";
+            var id = _adminService.InsertMediaCentre(item, dbPath);
 
-            int id = _adminService.InsertMediaCentre(item, dbPath);
-
-            return Ok(new
-            {
-                message = "Media inserted successfully",
-                id,
-                imagePath = dbPath
-            });
+            return Respond(new { Id = id, ImagePath = dbPath },
+                "Media inserted successfully");
         }
 
         [HttpGet("mediaCentreGet")]
         public IActionResult GetMediaCentre()
         {
-            var data = _adminService.GetMediaCentre();
-            return Ok(data);
+            return Respond(
+                _adminService.GetMediaCentre(),
+                "Media fetched successfully");
         }
 
-        [Authorize(Roles = "Admin")]
+        // ---------------- ZIP ----------------
         [HttpPost("upload-zip")]
         public async Task<IActionResult> UploadZip([FromForm] ZipUploadDto request)
         {
-            try
-            {
-                var images = await _adminService.UploadAndExtractZipAsync(request.ZipFile, request.ItemId);
-                return Ok(new { message = "ZIP extracted successfully", images });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return await RespondAsync(
+                () => _adminService.UploadAndExtractZipAsync(
+                    request.ZipFile, request.ItemId),
+                "ZIP extracted successfully");
         }
 
         [HttpGet("images")]
         public IActionResult GetImages([FromQuery] int? itemId = null)
         {
-            var images = _adminService.GetMediaImages(itemId);
-            return Ok(images);
+            return Respond(
+                _adminService.GetMediaImages(itemId),
+                "Images fetched successfully");
         }
     }
 }
