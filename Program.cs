@@ -4,6 +4,7 @@ using Jamghat.Models.Admin;
 using Jamghat.Models.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using static jamghat.FeatureServices.MailService.MailModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,10 @@ var jwtSettings = builder.Configuration.GetSection("Jwt");
 // AuthService
 builder.Services.AddSingleton<IAuth, AuthService>();
 builder.Services.AddSingleton<IAdminService, AdminServices>();
+builder.Services.Configure<MailSettings>(
+    builder.Configuration.GetSection("MailSettings"));
+
+builder.Services.AddScoped<MailSender>();
 
 // Controllers
 builder.Services.AddControllers();
@@ -63,9 +68,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy.WithOrigins(
-                "http://localhost:5299",  // HTTP dev frontend
-                "https://localhost:7122", // HTTPS dev frontend
-                "https://eduaffair.in")   // Production
+                "http://localhost:5299",  
+                "https://localhost:7122", 
+                "https://jamghat.org")   
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -87,11 +92,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Jamghat API V1");
-        c.RoutePrefix = string.Empty; // Swagger at root /
+        c.RoutePrefix = string.Empty; 
     });
 }
 
-// Use CORS
 app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
@@ -99,11 +103,6 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Map controllers
 app.MapControllers();
-
-// Optional root endpoint
 app.MapGet("/", () => "API is running!");
-
-// Run app
 app.Run();

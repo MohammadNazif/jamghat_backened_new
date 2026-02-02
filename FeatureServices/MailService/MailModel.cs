@@ -2,10 +2,13 @@
 {
     public class MailModel
     {
-        public class CommonMessage
+        public class MailSettings
         {
-            public bool Status { get; set; }
-            public string Message { get; set; }
+            public string SenderId { get; set; }
+            public string Password { get; set; }
+            public string Host { get; set; }
+            public int Port { get; set; }
+            public bool EnableSsl { get; set; }
         }
 
         public class MailRequest

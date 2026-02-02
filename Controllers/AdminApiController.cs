@@ -13,11 +13,15 @@ namespace Jamghat.Controllers
     {
         private readonly IAdminService _adminService;
         private readonly IWebHostEnvironment _env;
+        private readonly MailSender _mailsender;
 
-        public AdminApiController(IAdminService adminService, IWebHostEnvironment env)
+        public AdminApiController(IAdminService adminService, IWebHostEnvironment env, MailSender mailSender)
         {
             _adminService = adminService;
             _env = env;
+            _mailsender = mailSender;
+
+
         }
 
         // ---------------- CONTACT FORM ----------------
@@ -29,9 +33,20 @@ namespace Jamghat.Controllers
 
             return await RespondAsync(async () =>
             {
-                await _adminService.AddContactFormAsync(contactForm);
+                var result = await _adminService.AddContactFormAsync(contactForm);
+                if (result)
+                {
+                    await _mailsender.SendAsync(
+               contactForm.Email,
+          "Welcome to Jamghat 🎉",
+       $"<h3>Hello {contactForm.FullName}</h3><p>Your account is created successfully.</p>"
+    );
+                }
                 return true;
+
             }, "Contact form submitted successfully");
+
+
         }
 
         [HttpGet("contactforms")]
