@@ -11,6 +11,7 @@
             public string Subject { get; set; } = null!;
             public string Message { get; set; } = null!;
             public DateTime? CreatedAt { get; set; }
+            public int TotalCount { get; set; }
         }
 
         public class PdfFile
@@ -59,6 +60,7 @@ public class InternshipRequestDto
             public bool PoliceDeclaration { get; set; }
             public bool CertificateRequired { get; set; }
             public string LetterFilePath { get; set; }
+            public int TotalCount { get; set; }
         }
         public class ItemDto
         {
@@ -71,6 +73,7 @@ public class InternshipRequestDto
             public string Link { get; set; }
             public IFormFile ImageFile { get; set; }
 
+            public int totalCount { get; set; }
             public string  Image { get; set; }
         }
         public class ZipUploadDto

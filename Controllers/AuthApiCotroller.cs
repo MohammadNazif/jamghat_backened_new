@@ -28,6 +28,8 @@ namespace Jamghat.Controllers
 
             return Ok(new
             {
+                success = true,
+                statusCode = 200,
                 token = result.token,
                
             });

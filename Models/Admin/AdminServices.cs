@@ -62,7 +62,9 @@ namespace Jamghat.Models.Admin
                     Phone = reader["Phone"]?.ToString(),
                     Subject = reader["Subject"].ToString() ?? string.Empty,
                     Message = reader["Message"].ToString() ?? string.Empty,
-                    CreatedAt = reader["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(reader["CreatedAt"]) : DateTime.MinValue
+                    CreatedAt = reader["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(reader["CreatedAt"]) : DateTime.MinValue,
+                    TotalCount = Convert.ToInt32(reader["TotalCounts"]),
+              
                 });
             }
 
@@ -168,7 +170,8 @@ namespace Jamghat.Models.Admin
                     PastExperience = reader.GetString(reader.GetOrdinal("PastExperience")),
                     PoliceDeclaration = reader.GetBoolean(reader.GetOrdinal("PoliceDeclaration")),
                     CertificateRequired = reader.GetBoolean(reader.GetOrdinal("CertificateRequired")),
-                    LetterFilePath = reader.GetString(reader.GetOrdinal("LetterFilePath"))
+                    LetterFilePath = reader.GetString(reader.GetOrdinal("LetterFilePath")),
+                    TotalCount = Convert.ToInt32(reader["totalCount"])
                 });
             }
 
@@ -219,7 +222,8 @@ namespace Jamghat.Models.Admin
                     Image = dr["Image"]?.ToString(),
                     Description = dr["Description"]?.ToString(),
                     Type = dr["Type"]?.ToString(),
-                    Link = dr["Link"]?.ToString()
+                    Link = dr["Link"]?.ToString(),
+                    totalCount = Convert.ToInt32(dr["totalCounts"])
                 });
             }   
 
