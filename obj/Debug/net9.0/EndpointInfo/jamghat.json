@@ -278,6 +278,10 @@
                     "type": "string",
                     "format": "binary"
                   },
+                  "totalCount": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
                   "Image": {
                     "type": "string"
                   }
@@ -303,6 +307,9 @@
                   "style": "form"
                 },
                 "ImageFile": {
+                  "style": "form"
+                },
+                "totalCount": {
                   "style": "form"
                 },
                 "Image": {
@@ -477,6 +484,10 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -537,6 +548,10 @@
           "letterFilePath": {
             "type": "string",
             "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

@@ -166,3 +166,4 @@ E:\jamghat\Jamghat\jamghat_new\jamghat\obj\Debug\net9.0\refint\jamghat.dll
 E:\jamghat\Jamghat\jamghat_new\jamghat\obj\Debug\net9.0\jamghat.pdb
 E:\jamghat\Jamghat\jamghat_new\jamghat\obj\Debug\net9.0\jamghat.genruntimeconfig.cache
 E:\jamghat\Jamghat\jamghat_new\jamghat\obj\Debug\net9.0\ref\jamghat.dll
+E:\jamghat\Jamghat\jamghat_new\jamghat\obj\Debug\net9.0\jamghat.sourcelink.json

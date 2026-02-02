@@ -235,6 +235,11 @@
         "IsRequired": false
       },
       {
+        "Name": "totalCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
         "Name": "Image",
         "Type": "System.String",
         "IsRequired": false
