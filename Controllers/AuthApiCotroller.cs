@@ -30,6 +30,7 @@ namespace Jamghat.Controllers
             {
                 success = true,
                 statusCode = 200,
+                message = "login successfull",
                 token = result.token,
                
             });
