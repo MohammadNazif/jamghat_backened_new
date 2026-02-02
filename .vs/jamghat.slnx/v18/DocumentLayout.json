@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|e:\\jamghat\\jamghat\\jamghat_new\\jamghat\\jamghat\\controllers\\adminapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|solutionrelative:jamghat\\controllers\\adminapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|e:\\jamghat\\jamghat\\jamghat_new\\jamghat\\jamghat\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|solutionrelative:jamghat\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|e:\\jamghat\\jamghat\\jamghat_new\\jamghat\\jamghat\\jamghat.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|solutionrelative:jamghat\\jamghat.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|e:\\jamghat\\jamghat\\jamghat_new\\jamghat\\jamghat\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|solutionrelative:jamghat\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|e:\\jamghat\\jamghat\\jamghat_new\\jamghat\\jamghat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|solutionrelative:jamghat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|e:\\jamghat\\jamghat\\jamghat_new\\jamghat\\jamghat\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D140FEB5-27A0-C577-BE9B-9E7752C77134}|jamghat\\jamghat.csproj|solutionrelative:jamghat\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "jamghat\\Properties\\launchSettings.json",
+              "ToolTip": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\Properties\\launchSettings.json",
+              "RelativeToolTip": "jamghat\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-02T08:39:22.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\appsettings.json",
+              "RelativeDocumentMoniker": "jamghat\\appsettings.json",
+              "ToolTip": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\appsettings.json",
+              "RelativeToolTip": "jamghat\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-02T08:02:23.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "jamghat.http",
+              "DocumentMoniker": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\jamghat.http",
+              "RelativeDocumentMoniker": "jamghat\\jamghat.http",
+              "ToolTip": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\jamghat.http",
+              "RelativeToolTip": "jamghat\\jamghat.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-02-02T08:02:09.487Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "WeatherForecast.cs",
+              "DocumentMoniker": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\WeatherForecast.cs",
+              "RelativeDocumentMoniker": "jamghat\\WeatherForecast.cs",
+              "ToolTip": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\WeatherForecast.cs",
+              "RelativeToolTip": "jamghat\\WeatherForecast.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T08:02:07.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AdminApiController.cs",
+              "DocumentMoniker": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\Controllers\\AdminApiController.cs",
+              "RelativeDocumentMoniker": "jamghat\\Controllers\\AdminApiController.cs",
+              "ToolTip": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\Controllers\\AdminApiController.cs",
+              "RelativeToolTip": "jamghat\\Controllers\\AdminApiController.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAmwG8AAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T08:00:41.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\Program.cs",
+              "RelativeDocumentMoniker": "jamghat\\Program.cs",
+              "ToolTip": "E:\\jamghat\\Jamghat\\jamghat_new\\jamghat\\jamghat\\Program.cs",
+              "RelativeToolTip": "jamghat\\Program.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEEAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T07:54:41.286Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
